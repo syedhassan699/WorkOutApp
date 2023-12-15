@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.workout.databinding.ActivityExerciseBinding
 import java.lang.Exception
 import java.util.Locale
@@ -28,6 +29,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var tts : TextToSpeech? = null
     private var player: MediaPlayer? = null
+
+    private var exerciseAdaptor : ExerciseStatusAdaptor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
           onBackPressed()
         }
         setupRestView()
+        setupRecyclerView()
     }
 
     private fun setupRestView(){
@@ -115,8 +119,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvTimer?.text = (10 - restProgress).toString()
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
                 currentExercisePosition++
+
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                exerciseAdaptor!!.notifyDataSetChanged()
                  setExerciseView()
             }
 
@@ -133,7 +141,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvTimerExercise?.text = (30 - exerciseProgress).toString()
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
+
+                exerciseList!![currentExercisePosition].setIsSelected(false)
+                exerciseList!![currentExercisePosition].setIsCompleted(true)
+                exerciseAdaptor!!.notifyDataSetChanged()
+
+
                 if (currentExercisePosition < exerciseList!!.size){
                     setupRestView()
                 }else{
@@ -185,5 +200,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun speakOut(text: String){
         tts!!.speak(text,TextToSpeech.QUEUE_FLUSH,null)
+    }
+
+    private fun setupRecyclerView(){
+        binding?.rvExerciseStatus?.layoutManager =
+            LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        exerciseAdaptor = ExerciseStatusAdaptor(exerciseList!!)
+        binding?.rvExerciseStatus?.adapter = exerciseAdaptor
     }
 }

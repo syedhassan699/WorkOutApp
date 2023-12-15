@@ -76,7 +76,7 @@
         </LinearLayout>
 
 
-    </FrameLayout>
+   </FrameLayout>
 
     <TextView
         android:id="@+id/tvUp"
@@ -127,21 +127,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage"
+        app:layout_constraintBottom_toTopOf="@+id/flExerciseView"
         />
 
     <FrameLayout
         android:id="@+id/flExerciseView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
         tools:visibility="visible"
         android:background="@drawable/itembordercircular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivImage"
-        app:layout_constraintBottom_toBottomOf="parent"
         >
 
         <ProgressBar
@@ -173,13 +171,25 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:text="30"
-                />
-
-
+            />
         </LinearLayout>
-
-
     </FrameLayout>
+    
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvExerciseStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            >
 
 
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
