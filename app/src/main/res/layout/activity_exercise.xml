@@ -128,6 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/flExerciseView"
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
         />
 
     <FrameLayout
@@ -140,6 +141,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivImage"
+        app:layout_constraintBottom_toBottomOf="parent"
         >
 
         <ProgressBar

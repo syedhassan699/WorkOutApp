@@ -35,6 +35,42 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             />
-
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flBmi"
+        android:background="@drawable/itemripplebackground"
+        app:layout_constraintBottom_toTopOf="@id/tvbmi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_width="80dp"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bmi"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvbmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/calculator"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
