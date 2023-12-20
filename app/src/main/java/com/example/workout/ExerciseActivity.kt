@@ -28,7 +28,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var exerciseProgress = 0
 
     private var restTimeDuration: Long = 1
-    private var exerciseTimeDuration: Long = 1
+    private var exerciseTimeDuration: Long = 3
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
@@ -140,7 +140,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setRestProgressBar(){
         binding?.progressBar?.progress = restProgress
 
-        restTimer = object : CountDownTimer(restTimeDuration*1000,1000){
+        restTimer = object : CountDownTimer(restTimeDuration*10000,1000){
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                     binding?.progressBar?.progress = 10 - restProgress
@@ -162,7 +162,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar(){
         binding?.pbExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(exerciseTimeDuration*1000,1000){
+        exerciseTimer = object : CountDownTimer(exerciseTimeDuration*10000,1000){
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
                 binding?.pbExercise?.progress = 30 -  exerciseProgress
