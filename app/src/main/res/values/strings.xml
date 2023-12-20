@@ -25,4 +25,9 @@
     <string name="us_units">US UNITS</string>
     <string name="feet">Feet</string>
     <string name="inch">Inch</string>
+    <string name="weight_in_pounds">Weight (in pounds)</string>
+    <string name="history">History</string>
+    <string name="calender">Calender</string>
+    <string name="no_data_available">NO DATA AVAILABLE</string>
+    <string name="exercise_completed">EXERCISE COMPLETED</string>
 </resources>

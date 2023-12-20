@@ -17,9 +17,6 @@ class BmiActivity : AppCompatActivity() {
     }
 
     private var currentVisibleView: String =  METRIC_UNITS_VIEW
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBmiBinding.inflate(layoutInflater)
@@ -47,8 +44,13 @@ class BmiActivity : AppCompatActivity() {
         }
 
         binding?.btnCalculateUnits?.setOnClickListener {
-            if (validateMetricUnits())
-            {
+          calculateUnits()
+        }
+    }
+
+    private fun calculateUnits(){
+        if (currentVisibleView == METRIC_UNITS_VIEW) {
+            if (validateMetricUnits()) {
                 val height: Float = binding?.etHeight?.text.toString().toFloat() / 100
                 val weight: Float = binding?.etWeight?.text.toString().toFloat()
                 val bmi = weight / (height * height)
@@ -56,9 +58,24 @@ class BmiActivity : AppCompatActivity() {
                 binding?.tvBmiValue?.text = bmi.toString()
                 displayBMIResult(bmi)
 
+            } else {
+                Toast.makeText(this, "PLEASE ENTER VALID DETAILS!!", Toast.LENGTH_SHORT).show()
             }
-            else{
-                    Toast.makeText(this, "PLEASE ENTER VALID DETAILS!!", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            if (validateUsUnits()) {
+                val usHeightFeet: Float =
+                    binding?.etUsMetricUnitHeightFeet?.text.toString().toFloat()
+                val usHeightInch: Float =
+                    binding?.etUsMetricUnitHeightInch?.text.toString().toFloat()
+                val usWeight: Float = binding?.etUsMetricUnitWeight?.text.toString().toFloat()
+                val usHeight: Float = usHeightFeet + usHeightFeet * 12
+                val bmi = 703 * (usWeight / (usHeight * usHeight))
+
+                binding?.tvBmiValue?.text = bmi.toString()
+                displayBMIResult(bmi)
+            } else {
+                Toast.makeText(this, "PLEASE ENTER VALID US DETAILS!!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -96,6 +113,21 @@ class BmiActivity : AppCompatActivity() {
         }
 
         if (binding?.etWeight?.text.toString().isEmpty()){
+            isValid= false
+        }
+        return isValid
+    }
+    private fun validateUsUnits():Boolean{
+        var isValid = true
+
+        if (binding?.etUsMetricUnitWeight?.text.toString().isEmpty()){
+            isValid=false
+        }
+
+        if (binding?.etUsMetricUnitHeightFeet?.text.toString().isEmpty()){
+            isValid= false
+        }
+        if (binding?.etUsMetricUnitHeightInch?.text.toString().isEmpty()){
             isValid= false
         }
         return isValid
